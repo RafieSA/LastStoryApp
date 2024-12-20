@@ -43,6 +43,7 @@ class MainViewModel(
         viewModelScope.launch {
             val token = userPreference.getSession().first().token
             storyRepository.getStories(token).cachedIn(viewModelScope).collect { pagingData ->
+                println("Collected PagingData: ${pagingData}")
                 _storyList.value = pagingData
             }
         }
